@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>ITEA-JS ADVANCED - LESSON 2: CLASSWORK 2</title>
+  <link rel="stylesheet" href="css/style.min.css" />
+</head>
+<body>
+  <div class="wrap">
+    <div class="testBlock hover">
+      <button class="iButton" id="mouseHover">Наведи</button>
+      <ul id="hoverResult" class="resultBlock">
+        <li class="red">Hovered!</li>
+        <li class="blue">Hovered!</li>
+        <li class="orange">Hovered!</li>
+        <li class="red">Hovered!</li>
+        <li class="red">Hovered!</li>
+      </ul>
+    </div>
+
+    <div class="testBlock click">
+      <button class="iButton" id="mouseClick">Нажми правой кнопкой мышки</button>
+      <div id="clickResult" class="resultBlock one two three four five six"></div>
+    </div>
+
+    <div class="testBlock context">
+      <button class="iButton" id="mouseContext">Вызови контекстное меню</button>
+      <div id="contextResult" class="resultBlock"></div>
+    </div>
+
+    <div class="testBlock keyboard">
+      <button class="iButton" id="keyboardButton">Нажми на клавиатуре</button>
+      <div id="keyboardResult" class="resultBlock"></div>
+    </div>
+
+  </div>
+
+  <script>
+    /*
+
+      Поработаем немного с ивентами:
+      onmouseenter
+      onclick
+      oncontextmenu
+      onkeydown
+
+      Задание:
+      На каждую из конопок назначить действие которое будет выполнять следующее действие:
+      1.На ховер(onmouseenter) повесить обработчик который будет при каждом наведении
+        на кнопку будет выводить в блок результатом елемент li с текстом "hovered!"
+        у которого будет один из следующих класов:
+        red blue green orange purple
+
+      2.На кнопку клика(onclick) повесить обработчик который будет удалять классы с
+        блока с результатом по очереди в таком порядке: (через массив)
+
+        six > two > three > four > one > five
+
+        после того как блок окажется пустым, добавить их в порядке возрастания
+
+        one > two > three ... > six
+
+      3.На кнопку контекстного меню (oncontextmenu) повесить обработчик который в блок
+        для результата выведет блок со списком меню используя следующий шаблон:
+
+        <a href="http://google.com.ua">Google</a>
+        <a href="http://itea.ua/">ITEA</a>
+        <a href="https://www.youtube.com/">Youtube</a>
+
+        для запрета вызова контектстного меню, нужно в функцию обработчик передать событие
+        element.onevent = function(e){...}
+        и вызвать внутри этой функции из этой переменной
+        e.preventDefault(); <- Отмена действия по умолчанию
+
+        Повтороное кажатие на эту кнопку правой или левой кнопкой мыши должно очистить блок.
+
+      4. На кнопку с обработчиком нажатия (onkeydown) повесить обработчик который будет
+        Выводить число нажатий на любую из клавиш клавиатуры
+
+
+    */
+    var colors = ["red", "blue", "orange", "green", 'purple', ];
+
+    function getRandomIntInclusive(min, max) {
+      min = Math.ceil(min);
+      max = Math.floor(max);
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    var hoverResult = document.getElementById("hoverResult");
+
+    mouseHover.onmouseenter = function(){
+      var newLi = document.createElement('li');
+      newLi.innerText = "Hovered!";
+
+      var colorIndex = getRandomIntInclusive(0, colors.length-1)
+      newLi.classList.add(colors[colorIndex])
+      hoverResult.appendChild(newLi);
+      console.log('hover', colors[colorIndex]);
+    }
+    
+
+    var clickResult = document.getElementById('clickResult');
+
+
+    mouseClick.onclick = function(){
+      if (clickResult.classList.contains('six') === true){
+        clickResult.classList.remove('six');
+      } if (clickResult.classList.contains('two') === true){
+        clickResult.classList.remove('two');
+      } if (clickResult.classList.contains('three') === true){
+        clickResult.classList.remove('three');
+      } if (clickResult.classList.contains('four') === true){
+        clickResult.classList.remove('four');
+      };
+
+      console.log(clickResult.classList);
+    }
+
+        //<li><a href="http://google.com.ua">Google</a></li>
+        //<li><a href="http://itea.ua/">ITEA</a></li>
+        //<li><a href="https://www.youtube.com/">Youtube</a></li>
+
+    var ul = document.createElement('ul');
+    ul.insertAdjacentHTML("afterbegin", '<li><a href="http://google.com.ua">Google</a></li><li><a href="http://itea.ua/">ITEA</a></li><li><a href="https://www.youtube.com/">Youtube</a></li>')
+
+
+    mouseContext.oncontextmenu = function(e){  
+      count++;
+      if (count >= 2) {
+        ul.style.display = 'none';
+      }
+      contextResult.appendChild(ul);
+      e.preventDefault();
+      console.log('context');
+    }
+
+
+    var count = 0;
+
+    keyboardButton.onkeydown = function(){
+      count++;
+      keyboardResult.innerText = count;
+      console.log('keyboard');
+    }
+
+  </script>
+</body>
+</html>

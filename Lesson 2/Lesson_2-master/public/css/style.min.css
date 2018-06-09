@@ -1,0 +1,11 @@
+img {
+  max-width: 270px;
+  border: 1px solid gray;
+  margin-right: 3px;
+}
+.showButton {
+  padding: 5px 20px;
+  background: #ffcc00;
+  border: none;
+}
+

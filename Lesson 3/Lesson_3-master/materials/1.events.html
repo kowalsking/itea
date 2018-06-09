@@ -1,0 +1,56 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>JS Events</title>
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <script>
+    /*
+
+      Браузерные события
+
+      События мыши:
+      click – происходит, когда кликнули на элемент левой кнопкой мыши
+      contextmenu – происходит, когда кликнули на элемент правой кнопкой мыши
+      mouseover – возникает, когда на элемент наводится мышь
+      mousedown и mouseup – когда кнопку мыши нажали или отжали
+      mousemove – при движении мыши
+
+      События на элементах управления:
+      submit – посетитель отправил форму <form>
+      focus – посетитель фокусируется на элементе, например нажимает на <input>
+
+      Клавиатурные события:
+      keydown – когда посетитель нажимает клавишу
+      keyup – когда посетитель отпускает клавишу
+
+      События документа:
+      DOMContentLoaded – когда HTML загружен и обработан, DOM документа полностью построен и доступен
+      load - Событие load происходит когда ресурс и его зависимые ресурсы закончили загружаться.
+
+      События CSS:
+      transitionend – когда CSS-анимация завершена.
+    */
+
+    </script>
+  </head>
+  <body>
+    <div class="wrap" id="wrap">
+        <h1>Welcome to JS Events</h1>
+        <div class="ButtonsBlock">
+          <h2> Ways to execute </h2>
+          <div>
+            <button onclick="CounterAdd(event)"> Click fiers from HTML</button>
+            <button id="fromCode"> Click fiers from code</button>
+            <button id="execution"> Execution </button>
+            <button id="eventObj" data-attr="Text"> Show EventObj </button>
+            <button onclick="console.log( this )"> Context this</button>
+          </div>
+        </div>
+
+        <script src="js/events.js"></script>
+        <script>
+          console.log(wrap.__proto__);
+        </script>
+    </div>
+  </body>

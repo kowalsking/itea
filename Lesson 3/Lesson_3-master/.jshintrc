@@ -1,0 +1,7 @@
+{
+  "esversion" : 6,
+  "supernew"  : true,
+  "node"      : true,
+  "-W138"     : true,
+  "-W097"     : true
+}
