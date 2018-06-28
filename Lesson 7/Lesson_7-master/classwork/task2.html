@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Constructors</title>
+</head>
+<body>
+
+  <div class="wrap">
+    <header>
+      <form>
+        <label for="author">
+          <span>Author</span>
+          <select id="author" name="author">
+            <option value="Taras Shevchenko">Taras Shevchenko</option>
+            <option value="Ivan Franko">Ivan Franko</option>
+            <option value="Vasyl Stys">Vasyl Stys</option>
+            <option value="Oles Gonchar">Oles Gonchar</option>
+          </select>
+        </label>
+
+        <label for="message">
+          <span>Message</span>
+          <textarea placeholder="Your Message" id="message"></textarea>
+          <button class="_sendMessage">Send</button>
+        </label>
+      </form>
+    </header>
+
+    <section>
+      <ul id="message_list">
+        <li>
+            <div class="message__date">
+              27/01/2018
+            </div>
+            <div class="message__author">
+              <b>Ivan Franko</b>
+            </div>
+            <div class="message__text">
+              Ночі безмірнії, ночі безсоннії...
+            </div>
+            <div class="message__controls">
+              <button class="_skipMessage">Skip</button>
+              <button class="_answerMessage">Answer</button>
+            </div>
+
+        </li>
+      </ul>
+
+    </section>
+
+
+
+  </div>
+
+
+  <script>
+  /*
+    Задание на классы.
+
+    Создать класс Message конструктор котрого состоит из следующих полей:
+    id, author, text, date, answers
+
+    У этого класса будет два метода:
+    SkipMessage() -> которое должно найти сообщение и удалить его из массива.
+    AnswerMessage()-> должно отрыть поле ввода, в который вы сможете ввести ответ
+    SendAnswer() -> метод который «отравляет» ответ, при этом апдейча поле ответа в вашем объекте с сообщением.
+
+    В метод SendAnswer нужно передать обьект класса Answer который наследуется от класса Message,
+    Но еще дополнительно будет иметь поле parentId.
+
+
+    +После создания сообщение добавляется в массив со всеми сообщениями, которые потом будут выводится на экран.
+
+    _ _ _
+
+    Задание можно разделить на две части:
+      1. Создание самого сообщения:
+      id->выдаётся автоматом
+      Author-> селект с выбором автора
+      Text -> текст сообщения
+      date -> автоматически в момент создания
+
+      Все данные беруться с формы. Массив с сообщениями передается в функцию рендера, которая генерирует сам список.
+
+      2. Ответ на сообщение
+
+  */
+    let count = 0;
+    let global_messages = [];
+
+    class Message {
+      constructor(author, text) {
+        // id, author, text, date, answers
+        this.id = count++;
+        this.author = author;
+        this.text = text;
+        this.date = new Date();
+        this.answers = [];
+
+        global_messages.push(this);
+      }
+
+      slipMessage() {
+
+      }
+
+      answerMessage() {
+
+      }
+
+      render() {
+        let renderTarget = document.getElementById('message_list');
+
+        let li  = document.createElement('li');
+
+        li.innerHTML = `
+            <div class="message__date">
+              27/01/2018
+            </div>
+            <div class="message__author">
+              <b>Ivan Franko</b>
+            </div>
+            <div class="message__text">
+              Ночі безмірнії, ночі безсоннії...
+            </div>
+            <div class="message__controls">
+              <button class="_skipMessage">Skip</button>
+              <button class="_answerMessage">Answer</button>
+            </div>`
+
+            let skipBtn = li.querySelector('._skipMessage');
+        
+        renderTarget.appendChild(li);
+      }
+    }
+
+    class Answer extends Message {
+      
+    }
+    
+    new Message('asd', 'asd');
+    new Message('asqwed', 'asasdd');
+
+    global_messages.map( item => item.render() );
+
+
+//  let selectAuthor = document.getElementById('author');
+//  let textareaMessage = document.getElementById('message');
+//  selectAuthor.addEventListener('change', optionAuthor);
+//     function optionAuthor(event) {
+//       let oioioi = event.target.value
+//       return event.target.value;
+//     }
+ 
+//  let count = 0;
+//  class Message {
+//    constructor(id, author, text, date, answers) {
+//      this.id = id;
+//      this.author = author;
+//      this.text = text;
+//      this.date = date;
+//      this.answers = answers;
+//     }
+    
+//     SkipMessage() {
+//       let _skipMessage = document.querySelector('._skipMessage');
+//       _skipMessage.addEventListener('click', event => {
+        
+//       })
+//     }
+    
+//     AnswerMessage() {
+//       let _answerMessage = document.querySelector('._answerMessage');
+//       _answerMessage.addEventListener('click', event => {
+//         console.log( this )
+//       })
+//     }
+    
+//     SendAnswer() {
+//       let _sendMessage = document.querySelector('._sendMessage');
+      
+//       _sendMessage.addEventListener('click', event => {
+        
+//         event.preventDefault();
+//         let answer1 = new Answer(count++, optionAuthor, textareaMessage.value, new Date(), 'How do you do?', 1);
+//         let answer2 = new Answer(count++, optionAuthor, textareaMessage.value, new Date(), 'How do you do?', 1);
+//         console.log(answer1);
+//         console.log(answer2);
+//       })
+//     }
+
+//     }
+    
+//     class Answer extends Message{
+//       constructor(id, author, text, date, answers) {
+//         super(id, author, text, date, answers);
+//         this.parentId = 0;
+//       }
+//     }
+    
+//     let newMessage = new Message(0, 'Mitya', 'Hello', new Date(), 'How do you do?', 1);
+//     // console.log(newMessage);
+//     // newMessage.SendAnswer();
+//     // console.log(newMessage.SendAnswer());
+//     newMessage.SendAnswer()
+//     newMessage.AnswerMessage();
+  </script>
+</body>
+</html>

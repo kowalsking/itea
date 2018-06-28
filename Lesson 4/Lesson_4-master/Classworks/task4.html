@@ -28,6 +28,79 @@
       var ukraineCity = ['Kyiv', 'Lviv', 'Odesa', 'Charkiv'];
       var polandCity = ['Warszawa', 'Poznan', 'Krakow', 'Katowice'];
       var usaCity = ['New York', 'Los Angeles', 'Las Vegas', 'Chicago'];
+      var result = document.getElementById('result');
+      var select = document.querySelector('select');
+
+      var pogoda1 = ['Солнечно','Легкий снегопад','Сильный снегопад'];
+      var pogoda2 = ['Солнечно', 'Дождь', 'Ветер', 'Сильный дождь'];
+      var pogoda3 = ['Солнечно', 'Засуха', 'Ветер'];
+
+      function randomInteger(min, max) {
+        var rand = min + Math.random() * (max + 1 - min);
+        rand = Math.floor(rand);
+        return rand;
+      }
+      
+      function pogoda(e) {
+        var temperature = randomInteger(-10, 40);
+        if(temperature < 0){
+          var r = Math.floor(Math.random()*pogoda1.length); 
+          console.log(temperature, pogoda1[r], e.target.innerText)
+        }
+        if(temperature > 0 && temperature <= 30){
+          var r = Math.floor(Math.random()*pogoda2.length); 
+          console.log(temperature, pogoda2[r], e.target.innerText)
+        }
+        if(temperature > 30 && temperature <= 40){
+          var r = Math.floor(Math.random()*pogoda3.length); 
+          console.log(temperature, pogoda3[r], e.target.innerText)
+        }
+      }
+
+
+
+      countries.forEach(function(item, i){
+        var option = new Option(item, i);
+        select.appendChild(option);
+      })
+      
+      select.addEventListener('change', function(e) {
+      
+        if(select.value == 0){
+          result.innerText = '';
+          var selectUkr = document.createElement('select');
+          ukraineCity.forEach(function(item, i){
+            var option = new Option(item, i);
+            selectUkr.appendChild(option);
+            result.appendChild(selectUkr);
+            console.log(e.target)
+          })
+          selectUkr.addEventListener('change', pogoda);
+        }
+
+        if(select.value == 1){
+          result.innerText = '';
+          var selectPol = document.createElement('select');
+          polandCity.forEach(function(item, i){
+            var option = new Option(item, i);
+            selectPol.appendChild(option);
+            result.appendChild(selectPol);
+          })
+          selectPol.addEventListener('change', pogoda);
+        }
+
+        if(select.value == 2){
+          result.innerText = '';
+          var selectUsa = document.createElement('select');
+          usaCity.forEach(function(item, i){
+            var option = new Option(item, i);
+            selectUsa.appendChild(option);
+            result.appendChild(selectUsa);
+          })
+          selectUsa.addEventListener('change', pogoda);
+        }
+      })
+
     });
   </script>
 </head>

@@ -1,0 +1,38 @@
+html {
+  background: red;
+}
+
+.header {
+  width: 100%;
+  height: 50px;
+  background: #ffcc00;
+}
+
+.header__block {
+  width: 100px;
+  color: red;
+  display: flex;
+}
+
+.header__icon {
+  margin: 20px;
+  padding: 30px;
+  background: url("../images/sprite/sprite-c6dd388c.svg") no-repeat;
+  background-position: 0 0;
+  width: 42px;
+  height: 51px;
+}
+
+.header__icon2 {
+  background: url("../images/sprite/sprite-c6dd388c.svg") no-repeat;
+  background-position: 0 99.92448588939818%;
+  width: 27.57px;
+  height: 27.57px;
+}
+
+.header__icon3 {
+  background: url("../images/sprite/sprite-c6dd388c.svg") no-repeat;
+  background-position: 0 64.55696202531645%;
+  width: 518px;
+  height: 518px;
+}

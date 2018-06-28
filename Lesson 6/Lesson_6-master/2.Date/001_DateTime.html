@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DateTime</title>
+
+</head>
+<body>
+
+  <input type="date" id='dateInput'/>
+  <button onclick="getDate(event)">Get Date</button>
+  <script>
+      // конструктор Date создает объект с текущей датой и временем:
+      var today = new Date();
+          // console.log('today', today );
+      // new Date(milliseconds)
+      // Создает объект Date, значение которого равно количеству миллисекунд (1/1000 секунды), прошедших с 1 января 1970 года GMT+0
+      // 24 часа после 01.01.1970 GMT+0
+      // var Jan02_1970 = new Date(60*60*24*1000);
+      // console.log('Jan02_1970', Jan02_1970, 60*60*24*1000);
+
+      // var myNewDate = new Date(1510876800000);
+      // console.log('myNewDate', myNewDate);
+
+      function getDate( event ){
+        // console.log(dateInput.value)
+        var ourDate = new Date( dateInput.value );
+            console.log( ourDate );
+      }
+      // new Date(dateString) можно использовать один из форматов:
+      // "October 13, 1975 11:13:00"
+      // "October 13, 1975 11:13"
+      // "October 13, 1975"
+      // 2010/08/17 12:09:36
+      // var dateString = "2011/08/17 12:09:36";
+      // var sevenYearsAgo = new Date(dateString);
+      // console.log('Seven Years Ago:',sevenYearsAgo);
+      /*
+        new Date(year, month, date, hours, minutes, seconds, ms)
+        Год year должен быть из 4 цифр.
+        Отсчет месяцев month начинается с нуля 0.
+      */
+      // var detailedDate = new Date(2011, 0, 1, 2, 3, 4, 567);
+      // console.log('detailedDate', detailedDate);
+
+  </script>
+</body>
+</html>

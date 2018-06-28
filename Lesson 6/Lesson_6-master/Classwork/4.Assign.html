@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Classwork</title>
+
+    <script>
+  /*
+    Задание:
+      1. Используя интерфейс который есть на страничке, написать визуальный
+      конструктор обектов используя значение key-value, которые вводятся в
+      соответствующие поля в форме.
+
+      2. Каждый созданый обьект выводить в тег code после добавления каждого
+      нового поля. Т.е мы должны визуально видить в каком состоянии наши обьекты
+      сейчас
+
+      3. По нажатию кнопки Combine Objects! два обьекта должны обьедениться
+      используя метод Object.assing или spread operator и вывестись на стринчку.
+
+      * Изменять HTML можно.
+
+  */
+    document.addEventListener("DOMContentLoaded", function(event) {
+        const combineButton = document.querySelector('.resultBlock button');
+        combineButton.addEventListener('click', (e) => {
+          e.preventDefault();
+
+          mergeCode.apply(mergeCode, forms2);
+        
+        })
+
+        function mergeCode() {
+          const codes = [].map.call(arguments, (item) => item.parseCode())
+          const mergedCode = Object.assign.apply({}, codes);
+
+          document.getElementById('result').innerText = JSON.stringify(mergedCode, null, 2);
+        }
+
+        function ObjForm(element) {
+          const form = element.querySelector('form');
+
+          this.storage = {};
+          this.keyInput = form.key;
+          this.valueInput = form.value;
+          this.submitButton = form.querySelector('button');
+          this.codeField = element.querySelector('code');
+
+          this.submitButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            this.addValue();
+          })
+        }
+
+        ObjForm.prototype.parseCode = function() {
+          try {
+            return JSON.parse(this.codeField.innerText)
+          } catch (error) {
+            console.log(error);
+            return {};
+          }
+        }
+
+        ObjForm.prototype.stringifyCode = function(code) {
+          this.codeField.innerText = JSON.stringify(code, null, 2);
+        }
+
+        ObjForm.prototype.addValue = function() {
+          const key = this.keyInput.value;
+          const value = this.valueInput.value;
+          const prevCode = this.parseCode();
+
+          if (key && value) {
+            prevCode[key] = value;
+
+            this.stringifyCode(prevCode);
+
+           this.keyInput.value = '';
+           this.valueInput.value = '';
+          }
+        }
+
+        const forms = document.querySelectorAll('.assigned');
+        const forms2 = [].map.call(forms, (form) => new ObjForm(form));
+
+
+    });
+    </script>
+</head>
+<body>
+  <div class="wrap">
+      <div class="assigned">
+        <form class="ObjForm" id="firstForm">
+            <input name="key" placeholder="Enter your key"/>
+            <input name="value" placeholder="Enter your value"/>
+            <button type="submit">Send</button>
+        </form>
+        <div class="createResult">
+          <header>
+            Created Object
+          </header>
+          <div class="createdObj">
+            <code clas="makeObj">
+              <pre>
+                {
+                  "id":123,
+                  "b":"test",
+                  "demo":"test2"
+                }
+              </pre>
+            </code>
+          </div>
+        </div>
+      </div>
+
+      <div class="assigned">
+        <form class="ObjForm">
+            <input name="key" placeholder="Enter your key"/>
+            <input name="value" placeholder="Enter your value"/>
+            <button type="submit">Send</button>
+          </form>
+          <div class="createResult">
+            <header>
+              Created Object
+            </header>
+            <div class="createdObj">
+              <code>
+                <pre>
+                  {
+                    "id":123,
+                    "b":"test",
+                    "demo":"test2"
+                  }
+                </pre>
+              </code>
+            </div>
+          </div>
+      </div>
+    </div>
+    <div class="resultBlock">
+       <button>Combine Objects!</button>
+      <h3> Result: </h3>
+      <pre>
+        <div id="result"></div>
+      </pre>
+    </div>
+
+      <script>
+
+      </script>
+      <style>
+        .wrap{
+          width: 800px;
+          display: flex;
+        }
+        .ObjForm,
+        .resultBlock{
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          box-sizing: border-box;
+          padding: 10px 20px;
+        }
+
+        .assigned{
+          width: 100%;
+        }
+        .createResult header{
+          font-weight: 700;
+        }
+      </style>
+</body>
+</html>

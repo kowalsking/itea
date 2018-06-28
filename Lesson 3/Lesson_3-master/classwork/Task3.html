@@ -52,9 +52,9 @@
       */
 
       var roadMap__container = document.querySelectorAll('.roadMap__container');
-      var roadMapPoint = document.querySelectorAll('.roadMapPoint');
       var navButton = document.querySelectorAll('.navButton');
       var roadMap = document.querySelectorAll('.roadMap');
+      var yellow = document.querySelector('.yellow');
       
       // roadMap__container[0].addEventListener('click', roadBall);
 
@@ -62,12 +62,17 @@
       //     el.addEventListener('click', roadBall)
       // });
       
-      navButton.forEach(function(button){
-        button.addEventListener('click', function(event){
-          if (event.target.innerText == '>'){
+      navButton.forEach(function(button) {
+        button.addEventListener('click', function(event) {
+          if (event.target.innerText == '>') {
               var choosenMapCont = event.target.parentNode;
-              var points = roadMapPoint.dataset.id;
-              console.log(points);
+              var roadMapPoint = choosenMapCont.querySelectorAll('.roadMapPoint');
+              var id = [];
+              roadMapPoint.forEach(function(item) {
+                id.push(item.dataset.id);
+              })
+              console.log(id); 
+              // var points = choosenMapCont.dataset.id;
               console.log(choosenMapCont);
             }
         })

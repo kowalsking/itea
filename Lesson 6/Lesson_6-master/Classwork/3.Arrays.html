@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Classwork</title>
+
+    <script>
+
+    /*
+      Задание:
+      1. При помощи методов изложеных ниже, переформатироать ITEA_COURSES в массив который содержит длину строк каждого из элементов.
+      2. Самостоятельно изучить метод Array.sort. Отфильтровать массив ITEA_COURSES по алфавиту.
+          + Бонусный бал. Вывести на страничку спискомв
+      3. Реализация функции поиска по массиву ITEA_COURSES.
+          + Бонусный бал. Вывести на страничку инпут и кнопку по которой будет срабатывать поиск.
+    */
+    document.addEventListener("DOMContentLoaded", function(event) {
+ 
+    const ITEA_COURSES = ["Курс HTML & CSS", "JavaScript базовый курс", "JavaScript продвинутый курс", "JavaScript Professional", "Angular 2.4 (базовый)", "Angular 2.4 (продвинутый)", "React.js", "React Native", "Node.js", "Vue.js"];
+
+    let itea_length = ITEA_COURSES.map( item => item.length);
+    console.log('map:', itea_length);
+
+    let itea_sort = ITEA_COURSES.sort();
+    console.log('sort:', itea_sort);
+
+    let courses = document.getElementById('courses');
+   
+    itea_sort.forEach( i => {
+      let li = document.createElement('li');
+      li.innerText = i;
+      courses.appendChild(li);
+    });
+    /* Виконати пошук по масиву */
+    // function iteaSort() {
+    //   let itea_obj = {};
+    //   itea_sort.forEach( i => {
+    //     let key = itea_sort[i];
+    //     itea_obj[key] = true;
+    //   })
+    // };
+    // console.log('pris' )
+    /*
+      Задание 2:
+      Написать фильтр массива по:
+      Актеру, продолжительности
+
+      Бонус:
+        Сделать графическую оболочку для программы:
+        - Селект со списком актеров
+        - Селект или инпут с продолжительностью
+        - Результат в виде списка фильмов
+    */
+
+      var stars = ['Elijah Wood', 'Ian McKellen', 'Orlando Bloom','Ewan McGregor',' Liam Neeson', 'Natalie Portman', 'Billy Bob Thornton', 'Martin Freeman']
+      var movies = [
+          {
+            name: "Lord of the Rigs",
+            duration: 240,
+            starring: [ 'Elijah Wood', 'Ian McKellen', 'Orlando Bloom']
+          },
+          {
+            name: "Star Wars: Episode I - The Phantom Menace",
+            duration: 136,
+            starring: [ 'Ewan McGregor',' Liam Neeson', 'Natalie Portman']
+          },
+          {
+            name: "Fargo",
+            duration: 100,
+            starring: [ 'Ewan McGregor', 'Billy Bob Thornton', 'Martin Freeman']
+          },
+          {
+          name: "V for Vendetta",
+          duration: 150,
+          starring: [ 'Hugo Weaving', 'Natalie Portman', 'Rupert Graves']
+          }
+        ];
+
+        // function sortByDuration( arr ) {
+        //   arr.forEach( item => {
+        //     if(item.duration > 200){
+        //       console.log(item.name)
+        //     }     
+        //   })
+        // }
+        
+        // function rightActor(actor){
+        //   if (actor === 'Ewan McGregor'){
+        //     return true;
+        //   }
+        // }
+
+        // function sortByActor( arr ) {
+        //   arr.forEach( item => {
+        //     if(item.starring.some(rightActor)){
+        //       console.log(item.name);
+        //     }
+        //   })
+        // }
+        
+        // sortByActor(movies);
+        // sortByDuration(movies);
+
+        let result = document.getElementById('result');
+        let result1 = document.getElementById('result1');
+        let favoriteActor = document.getElementById('favoriteActor');
+        favoriteActor.addEventListener('change', favoriteMovie);
+
+        let favoriteDuration = document.getElementById('favoriteDuration');
+        favoriteDuration.addEventListener('change', duration);
+        
+        movies.forEach( item => {
+          let option = document.createElement('option');
+          option.innerText = item.duration;
+          option.value = item.duration;
+          favoriteDuration.appendChild(option);
+        });
+
+        stars.forEach( item => {
+          let option = document.createElement('option');
+          option.innerText = item;
+          option.value = item;
+          favoriteActor.appendChild(option);
+        });
+
+        function renderSelectedMovie(movies) {
+          result.innerHTML = `<ul>${movies.map(movie => `<li>${movie.name}</li>`).join('')}</ul>`
+        }
+        
+        function favoriteMovie(event) {
+          function rightActor(actor) {
+            if (actor === event.target.value) {
+              return true;
+            }
+          }
+          
+          function sortByActor( arr ) {
+            const selectdMovies = [];
+            arr.forEach( item => {
+              if(item.starring.some(rightActor)) {
+                selectdMovies.push(item);
+              }
+            });
+            renderSelectedMovie(selectdMovies);
+          }
+          sortByActor( movies );
+        }
+
+        function duration(event) {
+          console.log(event.target.value)
+          function sortByDuration( arr ) {
+            arr.forEach( item => {
+              if(item.duration == event.target.value){
+                result1.innerHTML = `<ul><li>${item.name}</li></ul>`;
+              }     
+            })
+          }
+          sortByDuration( movies );
+        }
+      });
+    </script>
+</head>
+<body>
+  <ol id="courses"></ol>
+  <div id="resultDiv">
+    <p>Choose your favorite actor:</p>
+    <select id="favoriteActor"></select>
+    <div id="result"></div>
+
+    <p>Choose your favorite duration:</p>
+    <select id="favoriteDuration"></select>
+    <div id="result1"></div>
+  </div>
+</body>
+</html>

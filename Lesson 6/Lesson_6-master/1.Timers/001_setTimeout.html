@@ -1,0 +1,28 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>setTimeout</title>
+</head>
+<body>
+    <p>Ждем 3 секунды.</p>
+
+    <button onclick="myFunction()">Пробовать</button>
+    <script>
+        /*
+          setTimeout - метод выполняет код(или функцию),
+          указанный в первом аргументе, асинхронно, с задержкой в delay миллисекунд.
+          setTimeout выполняет код только один раз
+        */
+
+        function myFunction() {
+            setTimeout(
+              function(){console.log("Hello 1")},
+            1000);
+            console.log('Hello 2')
+        }
+        // setTimeout( handler, 1000);
+    </script>
+</body>
+</html>
