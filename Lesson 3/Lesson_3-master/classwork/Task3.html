@@ -51,49 +51,54 @@
 
       */
 
-      var roadMap__container = document.querySelectorAll('.roadMap__container');
-      var navButton = document.querySelectorAll('.navButton');
+      var container = document.querySelectorAll('.roadMap__container');
+      var button = document.querySelectorAll('.navButton');
       var roadMap = document.querySelectorAll('.roadMap');
-      var yellow = document.querySelector('.yellow');
       
-      // roadMap__container[0].addEventListener('click', roadBall);
-
-      // [].forEach.call(roadMap__container,function(el){
-      //     el.addEventListener('click', roadBall)
-      // });
-      
-      navButton.forEach(function(button) {
-        button.addEventListener('click', function(event) {
-          if (event.target.innerText == '>') {
-              var choosenMapCont = event.target.parentNode;
-              var roadMapPoint = choosenMapCont.querySelectorAll('.roadMapPoint');
-              var id = [];
-              roadMapPoint.forEach(function(item) {
-                id.push(item.dataset.id);
-              })
-              console.log(id); 
-              // var points = choosenMapCont.dataset.id;
-              console.log(choosenMapCont);
-            }
-        })
+      container.forEach( roadMap => {
+        roadMap.addEventListener('click', target);
       })
 
-      // function roadBall(event){
-      //   if (event.target.className == 'navButton'){
-      //     var id = event.target.getAttribute('data-id');
-      //     for (var i = 0; i <= roadMap.length; i++){
-      //       if (event.target.innerText == '>'){
-      //         roadMapPoint[i].classList.toggle('ball');            
+      function target(event) {
+        if (event.target) {
+          console.log(event.target.nodeName);
+        }
+      }
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
+      // navButton.forEach(function(button) {
+      //   button.addEventListener('click', function(event) {
+      //     if (event.target.innerText == '>') {
+      //         var choosenMapCont = event.target.parentNode;
+      //         var roadMapPoint = choosenMapCont.querySelectorAll('.roadMapPoint');
+      //         var id = [];
+
+      //         roadMapPoint.forEach(function(item) {
+      //           id.push(item.dataset.id);
+      //         })
+
       //       }
-      //     }
-          
-      //     if (event.target.innerText == '<'){
-      //       i--;
-      //     }
-      //     console.log(roadMap.length);
-      //   }
-      //   console.log(id)
-      // }
+      //   })
+      // })
+
     </script>
   </body>
 
