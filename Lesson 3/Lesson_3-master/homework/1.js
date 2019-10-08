@@ -28,7 +28,7 @@ window.onload = function(){
   var img = new Image();
   img.src = OurSliderImages[0];
   slider.appendChild(img);
-}
+};
 
 function RenderImage(){
   slider.innerHTML = '';
